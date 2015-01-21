@@ -16,7 +16,13 @@ public class Confirmation {
 			String fileName) {
 		createAndShowConfirmation(receiver, message, type, fileName);
 	}
-
+/**
+ * 
+ * @param receiver
+ * @param message
+ * @param type
+ * @param fileName
+ */
 	private void createAndShowConfirmation(String receiver, String message,
 			String type, String fileName) {
 		// Create and set up the window.
@@ -29,7 +35,14 @@ public class Confirmation {
 		// Display the window.
 		frame.setVisible(true);
 	}
-
+/**
+ * 
+ * @param frame
+ * @param receiver
+ * @param message
+ * @param type
+ * @param fileName
+ */
 	private void buildConfirmationPanel(JFrame frame, String receiver,
 			String message, String type, String fileName) {
 		JPanel panel = new JPanel();
