@@ -35,11 +35,13 @@ public class SendEmail extends Message {
 		JLabel adressBookLabel1 = new JLabel(Constants.ADRESSBOOK);
 		JLabel adressBookLabel2 = new JLabel(Constants.ADRESSBOOK);
 		JLabel priority = new JLabel("Priorität");
+		JLabel subjectLabel = new JLabel("Betreff");
 		JLabel fileNameLabel = new JLabel("");
 		JLabel messageLabel = new JLabel(Constants.TEXT);
 		JTextField receiverInput = new JTextField();
 		JTextField receiverCCInput = new JTextField();
 		JTextField receiverBCCInput = new JTextField();
+		JTextField subjectInput = new JTextField();
 		JComboBox adressBook = new JComboBox();
 		JComboBox adressBook1 = new JComboBox();
 		JComboBox adressBook2 = new JComboBox();
@@ -111,11 +113,13 @@ public class SendEmail extends Message {
 		priorityHigh.setSelected(false);
 		priorityLow.setBounds(480, 240, 80, 25);
 		priorityLow.setSelected(false);
-		messageLabel.setBounds(10, 240, 80, 25);
-		messageInput.setBounds(100, 240, 250, 250);
-		sendButton.setBounds(100, 550, 80, 25);
-		fileNameLabel.setBounds(10, 550, 100, 25);
-		selectFileButton.setBounds(200, 550, 110, 25);
+		subjectLabel.setBounds(10, 240, 80, 25);
+		subjectInput.setBounds(100, 240, 250, 25);
+		messageLabel.setBounds(10, 280, 80, 25);
+		messageInput.setBounds(100, 280, 250, 250);
+		sendButton.setBounds(100, 600, 80, 25);
+		fileNameLabel.setBounds(10, 600, 100, 25);
+		selectFileButton.setBounds(200, 600, 110, 25);
 		cancelButton.setBounds(320, 650, 100, 25);
 		endButton.setBounds(450, 650, 100, 25);
 
@@ -134,6 +138,8 @@ public class SendEmail extends Message {
 		panel.add(receiverBCCInput);
 		panel.add(adressBookLabel2);
 		panel.add(adressBook2);
+		panel.add(subjectLabel);
+		panel.add(subjectInput);
 		panel.add(messageLabel);
 		panel.add(messageInput);
 		panel.add(priority);
@@ -148,7 +154,7 @@ public class SendEmail extends Message {
 		selectFileButton.addActionListener(setSelectFileButtonListener(frame,
 				fileNameLabel));
 		sendButton.addActionListener(setSendButtonListener(frame,
-				receiverInput, receiverCCInput, receiverBCCInput, messageInput,
+				receiverInput, receiverCCInput, receiverBCCInput, subjectInput, messageInput,
 				priorityHigh, priorityLow, fileNameLabel));
 		cancelButton.addActionListener(setCancelButtonListener(frame));
 		endButton.addActionListener(setEndButtonListener(frame));
@@ -181,7 +187,7 @@ public class SendEmail extends Message {
 	// pass information from SendEmail to EmailConfirmation
 	protected ActionListener setSendButtonListener(JFrame frame,
 			JTextField receiverInput, JTextField receiverCCInput,
-			JTextField receiverBCCInput, JTextArea messageInput,
+			JTextField receiverBCCInput, JTextField subjectInput, JTextArea messageInput,
 			JCheckBox priorityHigh, JCheckBox priorityLow, JLabel fileNameInput) {
 		ActionListener sendButtonListener = new ActionListener() {
 			@Override
@@ -197,10 +203,11 @@ public class SendEmail extends Message {
 				if (lowSelected) {
 					prio = "Tief";
 				}
-
+				
 				String receiver = receiverInput.getText();
 				String receiverCC = receiverCCInput.getText();
 				String receiverBCC = receiverBCCInput.getText();
+				String subject = subjectInput.getText();
 				String message = messageInput.getText();
 				String fileName = fileNameInput.getText();
 
@@ -210,7 +217,7 @@ public class SendEmail extends Message {
 							receiverBCC)) {
 						frame.dispose();
 						new EmailConfirmation(receiver, receiverCC,
-								receiverBCC, message, prio, Constants.EMAIL,
+								receiverBCC, subject, message, prio, Constants.EMAIL,
 								fileName);
 					} else {
 						JOptionPane.showMessageDialog(null,
@@ -223,7 +230,7 @@ public class SendEmail extends Message {
 					if (Validation.isValidEmailAddressCC(receiver, receiverCC)) {
 						frame.dispose();
 						new EmailConfirmation(receiver, receiverCC,
-								receiverBCC, message, prio, Constants.EMAIL,
+								receiverBCC, subject, message, prio, Constants.EMAIL,
 								fileName);
 					} else {
 						JOptionPane.showMessageDialog(null,
@@ -235,7 +242,7 @@ public class SendEmail extends Message {
 					if (Validation.isValidEmailAddress(receiver)) {
 						frame.dispose();
 						new EmailConfirmation(receiver, receiverCC,
-								receiverBCC, message, prio, Constants.EMAIL,
+								receiverBCC, subject, message, prio, Constants.EMAIL,
 								fileName);
 					} else {
 						JOptionPane.showMessageDialog(null,

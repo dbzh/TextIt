@@ -47,6 +47,7 @@ public class StartGUI {
 		JButton printerButton = new JButton(Constants.PRINTER);
 		JButton tweetButton = new JButton(Constants.TWEET);
 		JButton endButton = new JButton(Constants.END);
+		JButton aboutButton = new JButton("About");
 
 		// set properties of elements
 		emailButton.setBounds(10, 10, 100, 25);
@@ -55,6 +56,7 @@ public class StartGUI {
 		printerButton.setBounds(10, 120, 100, 25);
 		tweetButton.setBounds(10, 160, 100, 25);
 		endButton.setBounds(10, 400, 100, 25);
+		aboutButton.setBounds(150, 400, 100, 25);
 
 		// add to panel
 		panel.add(emailButton);
@@ -63,6 +65,7 @@ public class StartGUI {
 		panel.add(printerButton);
 		panel.add(tweetButton);
 		panel.add(endButton);
+		panel.add(aboutButton);
 
 		// ActionListeners for buttons
 		emailButton.addActionListener(setEmailButtonListener(frame));
@@ -71,6 +74,7 @@ public class StartGUI {
 		printerButton.addActionListener(setPrinterButtonListener(frame));
 		tweetButton.addActionListener(setTweetButtonListener(frame));
 		endButton.addActionListener(setEndButtonListener(frame));
+		aboutButton.addActionListener(setAboutButtonListener(frame));
 		frame.add(panel);
 	}
 
@@ -160,6 +164,19 @@ public class StartGUI {
 			}
 		};
 		return endButtonListener;
+
+	}
+
+	public static ActionListener setAboutButtonListener(JFrame frame) {
+		ActionListener setAboutButtonListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				new About();
+			}
+		};
+		return setAboutButtonListener;
 
 	}
 
